@@ -31,7 +31,7 @@ const AddStudent = () => {
 
     return (
         <div className='w-full bg-white shadow-md rounded-md p-3'>
-            <h1 className='text-2xl p-2 rounded-md bg-teal-900 font-bold text-white w-fit'>Tambah Siswa</h1>
+            <h1 className='text-2xl p-2 rounded-md bg-primary font-bold text-white w-fit'>Tambah Siswa</h1>
             <div className='mt-10'>
                 <form action="">
                     <div>

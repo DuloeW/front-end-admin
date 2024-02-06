@@ -5,3 +5,7 @@ th {
 td {
     padding: 20px 0 20px 0;
 }
+
+.list-students {
+    box-shadow: 0 0 5px #dadada;
+}

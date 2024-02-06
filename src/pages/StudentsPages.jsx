@@ -13,11 +13,13 @@ import {
 import Table from "../components/Table.jsx";
 import ListBoxClass from "../components/ListBoxClass.jsx";
 import Header from "../components/Header.jsx";
+import UpdateAbsensi from "../components/UpdateAbsensi.jsx";
 
 const StudentsPages = () => {
 
     const [showOptions, setShowOptions] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
+    const [showUpdateAbsensi, setShowUpdateAbsensi] = useState(false)
 
     const switchShowOptions = () => {
         setShowOptions(prevState => !prevState)
@@ -36,10 +38,19 @@ const StudentsPages = () => {
         setShowSearch(false)
     }
 
+    const openUpdateAbsensi = (open) => {
+        setShowUpdateAbsensi(open)
+    }
+
+    const closeUpdateAbsensi = (close) => {
+        setShowUpdateAbsensi(close)
+    }
+
     return (
         <div className='w-full h-fit bg-neutral-200 flex'>
             <Sidebar/>
-            <div className='w-11/12 h-fit p-5'>
+            <div className='w-11/12 h-fit p-5 relative overflow-hidden'>
+                {showUpdateAbsensi && <UpdateAbsensi onClick={closeUpdateAbsensi}/>}
                 <Header title={'Data Siswa'} urLTitle={'pages/students'}/>
                 <div className='w-full h-80 bg-white flex flex-col justify-between rounded-xl p-5 mt-10'>
                     <div className='w-full flex justify-between'>
@@ -94,7 +105,7 @@ const StudentsPages = () => {
                         </div>
                     </div>
                     <div className='w-full overflow-y-auto mt-10'>
-                        <Table/>
+                        <Table onClickOpen={openUpdateAbsensi}/>
                     </div>
                 </div>
             </div>

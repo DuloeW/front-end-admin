@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import bayu from "../assets/bayu.jpg";
 import AddStudent from "./AddStudent.jsx";
 import DetailStudent from "./DetailStudent.jsx";
+import '../assets/css/Custom.css'
 
 
 const students = [
@@ -70,8 +71,8 @@ const DetailClass = ({onclick}) => {
     return (
         <>
             <div className='absolute -top-16 right-0 z-50 '>
-                <FontAwesomeIcon icon={faUser} onClick={() => openShowDetail()} className='text-2xl p-2 bg-teal-900 cursor-pointer rounded-md text-white m-8'/>
-                <FontAwesomeIcon icon={faAdd} onClick={() => closeShowDetail()} className='text-2xl p-2 bg-teal-900 cursor-pointer rounded-md text-white m-8'/>
+                <FontAwesomeIcon icon={faUser} onClick={() => openShowDetail()} className='text-2xl p-2 bg-primary cursor-pointer rounded-md text-white m-8'/>
+                <FontAwesomeIcon icon={faAdd} onClick={() => closeShowDetail()} className='text-2xl p-2 bg-primary cursor-pointer rounded-md text-white m-8'/>
             </div>
             <div className='w-full h-full flex gap-10 p-8 overflow-x-hidden z-50 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-xl'>
                 <div className='w-fit p-2 shadow-md'>
@@ -88,10 +89,10 @@ const DetailClass = ({onclick}) => {
                                 placeholder='Cari Nama Siswa'/>
                         </div>
 
-                        <div className='w-full h-[450px] mt-4 border-t-2 py-5 overflow-y-auto'>
+                        <div className='w-full h-[450px] mt-4 px-1 border-t-2 py-5 overflow-y-auto'>
                             {students.map((student, index) => (
-                                <div key={index} className='p-2 bg-primary rounded-md mb-3'>
-                                    <h1 className='text-white font-bold'>{student.name}</h1>
+                                <div key={index} className='list-students p-2 bg-white cursor-pointer rounded-md mb-3 duration-150 hover:bg-primary hover:text-white'>
+                                    <h1 className='font-bold'>{student.name}</h1>
                                 </div>
                             ))}
                         </div>
