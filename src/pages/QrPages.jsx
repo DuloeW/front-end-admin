@@ -8,12 +8,12 @@ import Select from "../components/Select.jsx";
 import Header from "../components/Header.jsx";
 
 const listOptions = ['X', 'XI', 'XII']
-const listOptions2 = ['Rekayasa Perangkat Lunak', 'Tataboga', 'Teknik Komputer dan Jaringan', 'Multimedia', 'Teknik Elektronika Industri', 'Teknik Kendaraan Ringan', 'Teknik Sepeda Motor', 'Teknik Pemesinan']
 const QrPages = () => {
     const [classAndMajor, setClassAndMajor] = useState({
         class: '',
         major: ''
     })
+
     const handleClassSelect = (option) => {
         setClassAndMajor(prevState => {
             return {
@@ -41,7 +41,6 @@ const QrPages = () => {
                     <div className='w-full p-5 rounded-xl bg-white h-fit'>
                         <div>
                             <h1 className='text-3xl font-bold'>Silahkan Pilih Kelas</h1>
-                            {/*<p className='text-xs tracking-widest'>Silahkan Pilih Kelas</p>*/}
                         </div>
                         <div className='flex flex-col gap-5 mt-5'>
                             <Select title='Kelas' listOptions={listOptions} nameComponent={'Kelas'} onclick={handleClassSelect}/>

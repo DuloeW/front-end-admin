@@ -1,7 +1,29 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import useStudentsStore from "../store/StudentsStore.js";
+import axios from "../axios/axios.js";
+import Alert from "./Alert.jsx";
+import {faAdd, faCheck, faX, faRefresh} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const AddStudent = () => {
+const AddStudent = ({classGrade}) => {
     const [image, setImage] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [showAlert, setShowAlert] = useState(false)
+    const [alertProps, setAlertProps] = useState({
+        message: '',
+        icon: '',
+        trueOrFalse: false
+    })
+    const [formStudents, setFormStudent] = useState({
+        nisn: '',
+        name: '',
+        dateOfBirth: '',
+        image: null,
+        classGrade: classGrade,
+        status: 0
+    })
+    const {postStudent, addNewStudent} = useStudentsStore()
+
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader()
@@ -15,7 +37,6 @@ const AddStudent = () => {
         })
     }
 
-
     const handleInputFile = async (e) => {
         const file = e.target.files[0]
         try {
@@ -23,20 +44,144 @@ const AddStudent = () => {
             form.append('file', file)
             const base64 = await convertToBase64(file)
             setImage(prevState => base64)
-            console.log(base64)
         } catch (e) {
             console.log(e)
         }
     }
 
+    const handleInput = (e) => {
+        const {name, value} = e.target
+        setFormStudent(prevState => ({...prevState, [name]: value}))
+        console.log(e.target.value)
+    }
+
+    const handleInputDate = (e) => {
+        const {value} = e.target
+        const dateFormatted = formatDate(new Date(value))
+        setFormStudent(prevState => ({...prevState, dateOfBirth: dateFormatted}))
+    }
+
+    const uploadImageAndStudentToDatabase = async (file) => {
+        const form = new FormData();
+        form.append('file', file)
+        try {
+            setLoading(true)
+            const response = await axios.post('image/uploud', form, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            await postDataToDatabase(response.data.data.id)
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const deleteImage = async (id) => {
+        return await axios.delete(`image/delete/${id}`)
+    }
+
+    const createNewStudent = async (formStudents, imageId) => {
+        return await postStudent({...formStudents, image: imageId})
+    }
+
+    const handleSuccess = () => {
+        setAlertProps(prevState => ({
+            ...prevState,
+            message: 'Berhasil',
+            icon: faCheck,
+            trueOrFalse: true
+        }))
+        switchShowAlert()
+        console.log(showAlert)
+    }
+
+    const handleError = () => {
+        setAlertProps(prevState => ({
+            ...prevState,
+            message: 'Gagal',
+            icon: faX,
+            trueOrFalse: false
+        }))
+        switchShowAlert()
+    }
+
+    const postDataToDatabase = async (imageId) => {
+        if(formStudents.nisn === '' || formStudents.name === '') {
+            setAlertProps(prevState => ({
+                ...prevState,
+                message: 'Data Tidak Boleh Kosong',
+                icon: faX,
+                trueOrFalse: false
+            }))
+            switchShowAlert()
+            return
+        }
+
+        try {
+            setLoading(true)
+            const responseDataStudent = await createNewStudent(formStudents, imageId)
+            addNewStudent(responseDataStudent)
+            handleSuccess()
+        } catch (e) {
+            handleError()
+            await deleteImage(imageId)
+            console.log(e)
+        } finally {
+            setLoading(false)
+            setImage('')
+            setFormStudent({
+                nisn: '',
+                name: '',
+                image: null,
+                classGrade: classGrade,
+                status: 0
+            })
+        }
+    }
+
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        let month = (date.getMonth() + 1).toString();
+        let day = date.getDate().toString();
+
+        // Pad with leading zero if needed
+        if (month.length === 1) {
+            month = '0' + month;
+        }
+        if (day.length === 1) {
+            day = '0' + day;
+        }
+
+        return `${day}-${month}-${year}`;
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const file = e.target[3].files[0]
+        await uploadImageAndStudentToDatabase(file)
+    }
+
+    const switchShowAlert = () => {
+        setShowAlert(true)
+        setTimeout(() => {
+            setShowAlert(false)
+        }, 2000)
+    }
+
     return (
-        <div className='w-full bg-white shadow-md rounded-md p-3'>
+        <div className='w-full h-fit bg-white shadow-md rounded-md p-3 relative'>
+            {showAlert && (
+                <div className='absolute bg-white z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                    <Alert message={alertProps.message} icon={alertProps.icon} trueOrFalse={alertProps.trueOrFalse}/>
+                </div>
+            )}
             <h1 className='text-2xl p-2 rounded-md bg-primary font-bold text-white w-fit'>Tambah Siswa</h1>
             <div className='mt-10'>
-                <form action="">
+                <form method='POST' encType='multipart/form-data' onSubmit={(e) => handleSubmit(e)} >
                     <div>
-                        <label className='block text-primary font-semibold mt-4'
-                               htmlFor="nisn">
+                        <label className='block text-primary font-semibold mt-4' htmlFor="nisn">
                             Nisn Siswa
                         </label>
                         <input
@@ -44,7 +189,10 @@ const AddStudent = () => {
                             type="text"
                             name='nisn'
                             id='nisn'
+                            value={formStudents.nisn}
                             placeholder='Masukkan Nisn Siswa'
+                            required={true}
+                            onChange={(e) => handleInput(e)}
                         />
                     </div>
                     <div>
@@ -57,7 +205,25 @@ const AddStudent = () => {
                             type="text"
                             name='name'
                             id='name'
+                            value={formStudents.name}
                             placeholder='Masukkan Nama Siswa'
+                            required={true}
+                            onChange={(e) => handleInput(e)}
+                        />
+                    </div>
+                    <div>
+                        <label className='block text-primary font-semibold mt-4'
+                               htmlFor="dateOfBirth">
+                            Tanggal Lahir Siswa
+                        </label>
+                        <input
+                            className='w-full h-10 p-2 text-xs  rounded-md shadow-md focus:outline-none focus:border-teal-900 transition-all'
+                            type="date"
+                            name='dateOfBirth'
+                            id='dateOfBirth'
+                            pattern="\d{4}-\d{2}-\d{2}"
+                            required={true}
+                            onChange={(e) => handleInputDate(e)}
                         />
                     </div>
                     <div>
@@ -70,8 +236,8 @@ const AddStudent = () => {
                             type="file"
                             name='file'
                             id='file'
+                            required={true}
                             onChange={(e) => handleInputFile(e)}
-
                         />
                     </div>
                     <div className='w-full mt-8 grid place-items-center'>
@@ -86,9 +252,15 @@ const AddStudent = () => {
                         </div>
                     </div>
                     <button
-                        className='w-full mt-12 h-14 bg-teal-900 rounded-md text-white font-semibold'>Kirim
+                        className='w-full mt-12 h-14 bg-teal-900 rounded-md text-white font-semibold'>
+                        {loading ? (
+                            <FontAwesomeIcon icon={faRefresh} className='text-2xl animate-spin'/>
+                        ) : (
+                            <p>Kirim</p>
+                        )}
                     </button>
                 </form>
+
             </div>
         </div>
     );
