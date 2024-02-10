@@ -46,11 +46,14 @@ const StudentsPages = () => {
         setShowUpdateAbsensi(close)
     }
 
+    //TODO cuman kurang di view tambah kelas
     return (
         <div className='w-full h-fit bg-neutral-200 flex'>
             <Sidebar/>
             <div className='w-11/12 h-fit p-5 relative overflow-hidden'>
-                {showUpdateAbsensi && <UpdateAbsensi onClick={closeUpdateAbsensi}/>}
+                {showUpdateAbsensi && (
+                    <UpdateAbsensi onClick={closeUpdateAbsensi}/>
+                )}
                 <Header title={'Data Siswa'} urLTitle={'pages/students'}/>
                 <div className='w-full h-80 bg-white flex flex-col justify-between rounded-xl p-5 mt-10'>
                     <div className='w-full flex justify-between'>

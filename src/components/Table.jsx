@@ -4,7 +4,6 @@ import {faPen, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import '../assets/css/Custom.css'
 import UpdateAbsensi from "./UpdateAbsensi.jsx";
 
-//TODO baru sampe sini yaw
 const Table = ({onClickOpen}) => {
 
     const sendShowAction = () => {
