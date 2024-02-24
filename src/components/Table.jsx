@@ -1,14 +1,24 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import '../assets/css/Custom.css'
 import UpdateAbsensi from "./UpdateAbsensi.jsx";
+import useClassStore from "../store/ClassStore.js";
+import useStudentsStore from "../store/StudentsStore.js";
 
-const Table = ({onClickOpen}) => {
+const Table = ({onClickOpen, queryDate}) => {
 
-    const sendShowAction = () => {
+    const {classSelectedInStudentsPages} = useClassStore()
+    const {setStudentPickedInStudentsPages} = useStudentsStore()
+
+    const sendShowAction = (student) => {
         onClickOpen(true)
+        setStudentPickedInStudentsPages(student)
     }
+
+    useEffect(() => {
+        console.log(classSelectedInStudentsPages)
+    }, [classSelectedInStudentsPages]);
 
     return (
         <table className='w-full h-full'>
@@ -22,23 +32,17 @@ const Table = ({onClickOpen}) => {
                 </tr>
             </tbody>
             <tbody>
-                <tr className='border-b-2 border-neutral-200'>
-                        <td>83293829</td>
-                        <td>I Putu Bayu Gelgel Wiyantara</td>
-                        <td>Hadir</td>
-                        <td>05.00</td>
-                        <td onClick={() => sendShowAction()}>
+                {classSelectedInStudentsPages?.students?.map((student) => (
+                    <tr className='border-b-2 border-neutral-200' key={student.nisn}>
+                        <td>{student.nisn}</td>
+                        <td>{student.name}</td>
+                        <td>{student.absensi?.status}</td>
+                        <td>{student.absensi?.time}</td>
+                        <td onClick={() => sendShowAction(student)}>
                             <p className='bg-blue-700 text-white font-semibold text-center rounded-md py-2 cursor-pointer'>Edit</p>
                         </td>
-                </tr><tr className='border-b-2 border-neutral-200'>
-                        <td>83293829</td>
-                        <td>I Putu Bayu Gelgel Wiyantara</td>
-                        <td>Hadir</td>
-                        <td>05.00</td>
-                        <td onClick={() => sendShowAction()}>
-                            <p className='bg-blue-700 text-white font-semibold text-center rounded-md py-2 cursor-pointer'>Edit</p>
-                        </td>
-                </tr>
+                    </tr>
+                ))}
             </tbody>
         </table>
     )
