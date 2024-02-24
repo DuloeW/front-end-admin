@@ -4,8 +4,10 @@ import {create} from "zustand";
 const useStudentsStore = create((set) => ({
     students: [],
     studentPicked: {},
+    studentPickedInStudentsPages: {},
     setStudents: (students) => set({ students }),
     setStudentPicked: (studentPicked) => set({ studentPicked }),
+    setStudentPickedInStudentsPages: (studentPickedInStudentsPages) => set({ studentPickedInStudentsPages }),
     addNewStudent: (student) => set((state) => ({ students: [...state.students, student] })),
     getAllStudents: async () => {
         const response = await axios('students/get/status/active');

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Sidebar from '../components/Sidebar'
 import TitlePage from "../components/TitlePage.jsx";
 import BoxClass from "../components/BoxClass.jsx";
@@ -14,29 +14,14 @@ import Table from "../components/Table.jsx";
 import ListBoxClass from "../components/ListBoxClass.jsx";
 import Header from "../components/Header.jsx";
 import UpdateAbsensi from "../components/UpdateAbsensi.jsx";
+import useClassStore from "../store/ClassStore.js";
 
 const StudentsPages = () => {
 
-    const [showOptions, setShowOptions] = useState(false)
-    const [showSearch, setShowSearch] = useState(false)
     const [showUpdateAbsensi, setShowUpdateAbsensi] = useState(false)
-
-    const switchShowOptions = () => {
-        setShowOptions(prevState => !prevState)
-    }
-
-    const switchShowSearch = () => {
-        setShowSearch(prevState => !prevState)
-    }
-
-    const closeShowOptions = (type) => {
-        setShowOptions(false)
-        if (type === 'search') switchShowSearch()
-    }
-
-    const closeShowSearch = () => {
-        setShowSearch(false)
-    }
+    const [queryDate, setQueryDate] = useState(new Date().toISOString().split('T')[0])
+    const {classSelectedInStudentsPages} = useClassStore()
+    const {grade, major} = classSelectedInStudentsPages
 
     const openUpdateAbsensi = (open) => {
         setShowUpdateAbsensi(open)
@@ -45,6 +30,16 @@ const StudentsPages = () => {
     const closeUpdateAbsensi = (close) => {
         setShowUpdateAbsensi(close)
     }
+
+    const removeSymbol = (string) => {
+        return string.replace(/_/g, ' ')
+    }
+
+    const handleDateChange = (e) => {
+        setQueryDate(e.target.value)
+        localStorage.setItem('date', e.target.value)
+    }
+
 
     //TODO cuman kurang di view tambah kelas
     return (
@@ -68,14 +63,18 @@ const StudentsPages = () => {
                         </div>
                     </div>
                     <div>
-                        <ListBoxClass/>
+                        <ListBoxClass queryDate={queryDate}/>
                     </div>
                     <div className='border-b-2 w-fit'>
                         <h1 className='text-lg font-semibold'>Tanggal Absen</h1>
                         <input className='border-none outline-none'
                             type="date"
                             name="ka"
-                            id="ss"/>
+                            id="ss"
+                            value={queryDate}
+                            onChange={(e) => handleDateChange(e)}
+                            disabled={classSelectedInStudentsPages.id=== undefined}
+                        />
                     </div>
                 </div>
 
@@ -90,25 +89,22 @@ const StudentsPages = () => {
                             placeholder='Cari Nama Siswa'/>
                     </div>
                 </div>
-                <div className='w-full h-fit mt-5 bg-white p-3 rounded-xl relative'>
-                    <div className='w-full flex justify-between'>
+                <div className='w-full h-[700px] overflow-y-auto mt-5 bg-white rounded-xl relative'>
+                    <div className='w-full sticky top-0 bg-white p-3 flex justify-between'>
                         <div className='flex gap-10'>
                             <div>
                                 <h1 className='text-xl font-semibold'>Absen Siswa</h1>
-                                <p>Hari Ini</p>
-                            </div>
-                            <div
-                                className='flex items-center cursor-pointer gap-3 px-2 rounded-md text-white text-sm bg-teal-900'>
-                                <FontAwesomeIcon icon={faRefresh}/>
-                                <h1>Muat Ulang</h1>
+                                <p>{queryDate}</p>
                             </div>
                         </div>
                         <div className='flex items-center gap-4 relative'>
-                            <h1 className='text-xl font-semibold text-teal-900'>XII Rekayasa Perangkat Lunak</h1>
+                            <h1 className='text-xl font-semibold text-teal-900'>
+                                {classSelectedInStudentsPages.grade === undefined ? 'Pilih Kelas' : `${grade}`.concat(' ').concat(removeSymbol(major))}
+                            </h1>
                         </div>
                     </div>
-                    <div className='w-full overflow-y-auto mt-10'>
-                        <Table onClickOpen={openUpdateAbsensi}/>
+                    <div className='w-full px-3 overflow-y-auto mt-3'>
+                        <Table onClickOpen={openUpdateAbsensi} queryDate={queryDate}/>
                     </div>
                 </div>
             </div>

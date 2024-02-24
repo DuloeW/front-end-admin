@@ -13,7 +13,6 @@ const DetailClass = ({onclick, data}) => {
     const [showDetail, setShowDetail] = useState(false)
     const [selectedStudent, setSelectedStudent] = useState({})
     const {
-        classSelected,
         getClassById,
         setStudentsClassSelected,
         lengthStudentsOfClassSelected,
@@ -46,15 +45,14 @@ const DetailClass = ({onclick, data}) => {
             });
             setStudentsClassSelected(filteredStudents)
         } else {
-            await getClassById(classSelected.id)
+            await getClassById(data.id)
         }
     }
 
     useEffect(() => {
-        (async () => {
-            await setLengthStudentsOfClassSelected(classSelected.id)
-            await getClassById(classSelected.id)
-        })()
+        const studentsLength = setLengthStudentsOfClassSelected(data.id)
+        const classById =  getClassById(data.id)
+        Promise.all([studentsLength, classById])
     }, [students.length])
 
 
@@ -103,7 +101,7 @@ const DetailClass = ({onclick, data}) => {
                 {showDetail ? (
                     <DetailStudent student={selectedStudent}/>
                 ) : (
-                    <AddStudent classGrade={classSelected.id}/>
+                    <AddStudent classGrade={data.id}/>
                 )}
             </div>
         </>
