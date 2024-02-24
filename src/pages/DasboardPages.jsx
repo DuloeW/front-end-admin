@@ -12,48 +12,14 @@ import Header from "../components/Header.jsx";
 import useStudentsStore from "../store/StudentsStore.js";
 import useClassStore from "../store/ClassStore.js";
 import axios from "../axios/axios.js";
+import Cookies from "js-cookie";
 
 
 const DasboardPages = () => {
     const {students, getAllStudents} = useStudentsStore();
-    const {classes, getAllClasses} = useClassStore();
+    const {classes} = useClassStore();
     const [labels, setLabels] = useState([]);
     const [chart, setChart] = useState([])
-
-    const addDataPie = async () => {
-        try {
-            const hadir = await getAbsensiByStatus(0);
-            const izin = await getAbsensiByStatus(1);
-            const sakit = await getAbsensiByStatus(2);
-            const apla = await getAbsensiByStatus(3);
-            const data = [
-                {id: 1, status: "Hadir", siswa: hadir},
-                {id: 2, status: "Izin", siswa: izin},
-                {id: 3, status: "Sakit", siswa: sakit},
-                {id: 4, status: "Alpa", siswa: apla},
-            ]
-            setChart(data)
-            setLabels(data.map((data) => data.status))
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    const getAbsensiByStatus = async (status = 0) => {
-        try {
-            const body = {
-                status: status,
-                date: new Date(),
-            };
-            const response = await axios.post('absensi/get/status', body);
-            console.log(status, '', response.data.data.length)
-            return await response.data.data.length | 0;
-        } catch(err) {
-            console.error(err);
-            return 0;
-        }
-    }
-
     let dataChart = {
         datasets: [
             {
@@ -72,15 +38,48 @@ const DasboardPages = () => {
         ],
     };
 
+    const addDataPie = async () => {
+        try {
+            const hadir = getAbsensiByStatus(0);
+            const izin = getAbsensiByStatus(1);
+            const sakit = getAbsensiByStatus(2);
+            const apla = getAbsensiByStatus(3);
+            const res = await Promise.all([hadir, izin, sakit, apla]);
+            console.log(res, 'res')
+
+            const data = res.map((data, index) => {
+                return {
+                    id: index + 1,
+                    status: index === 0 ? "Hadir" : index === 1 ? "Izin" : index === 2 ? "Sakit" : "Alpa",
+                    siswa: data
+                }
+            });
+
+            setChart(data)
+            setLabels(data.map((data) => data.status))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const getAbsensiByStatus = async (status = 0) => {
+        try {
+            const body = {
+                status: status,
+                date: new Date("2024-02-10"),
+            };
+            const response = await axios.post('absensi/get/status', body);
+            return await response.data.data.length | 0;
+        } catch(err) {
+            console.error(err);
+            return 0;
+        }
+    }
+
     useEffect(() => {
         addDataPie();
     }, []);
 
-    // untuk box info
-    useEffect(() => {
-        getAllStudents();
-        getAllClasses()
-    }, [])
 
     //untuk real time add student
     useEffect(() => {
