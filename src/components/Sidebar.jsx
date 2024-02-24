@@ -2,6 +2,7 @@ import React from 'react'
 import smkIcon from "../assets/smk.svg"
 import LinkSideBar from './LinkSideBar'
 import { faHouse, faNoteSticky, faPeopleGroup, faQrcode } from '@fortawesome/free-solid-svg-icons'
+import useStoreSideBar from "../store/SidebarStore.js";
 
 const links = [
   {
@@ -42,7 +43,7 @@ const Sidebar = () => {
       </div>
       <div className='flex flex-col gap-5 mt-5'>
         {links.map(data => (
-          <LinkSideBar key={data.id} icon={data.icon} title={data.title} href={data.href} />
+          <LinkSideBar key={data.id} icon={data.icon} title={data.title} href={data.href}/>
         ))}
       </div>
     </div>

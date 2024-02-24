@@ -2,33 +2,36 @@
     import React, {useEffect, useState} from 'react';
     import {Link, matchRoutes, useLocation} from 'react-router-dom';
     import '../assets/css/Sidebar.css'
+    import useStoreSideBar from "../store/SidebarStore.js";
 
     const LinkSideBar = ({ icon, title, href }) => {
         const [active, setActive] = useState(false)
         const location = useLocation()
+        const {
+            activeUrl,
+            setActiveUrl
+        } = useStoreSideBar()
 
+        const handleClick = () => {
+            setActiveUrl(href)
+        }
 
-        // useEffect(() => {
-        //     console.log("Location Pathname:", location.pathname);
-        //     console.log("Href:", href);
-        //
-        //     if (location.pathname === href) {
-        //         setActive(true);
-        //     } else {
-        //         setActive(false);
-        //     }
-        //
-        // }, []);
-        //
-        // useEffect(() => {
-        //     console.log("Active:", active);
-        // }, [location.pathname]);
+        useEffect(() => {
+            if (activeUrl === href) {
+                setActive(true)
+            } else {
+                setActive(false)
+            }
+        }, [])
 
         return (
             <Link to={href}>
                 <button
+                    onClick={() => handleClick()}
                     type='button'
-                    className={`w-full outline-none border-none h-12 p-2 rounded-md flex items-center gap-5 transition-all text-white hover:bg-white hover:text-primary`}>
+                    className={`w-full outline-none border-none h-12 p-2 rounded-md flex items-center gap-5 transition-all hover:bg-white hover:text-primary
+                        ${active ? 'bg-white text-primary' : 'bg-primary text-white'}
+                    `}>
                     <FontAwesomeIcon icon={icon} />
                     <p className='font-semibold'>
                         {title}
