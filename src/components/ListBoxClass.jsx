@@ -23,7 +23,7 @@ const ListBoxClass = ({queryDate}) => {
 
     useEffect(() => {
         updateSelectedClassInStudentsPages(queryDate)
-    }, [queryDate, classSelectedInStudentsPages]);
+    }, [queryDate, classSelectedInStudentsPages?.id]);
 
 
     const renderBoxes2 = () => {

@@ -22,6 +22,7 @@ const StudentsPages = () => {
     const [queryDate, setQueryDate] = useState(new Date().toISOString().split('T')[0])
     const {classSelectedInStudentsPages} = useClassStore()
     const {grade, major} = classSelectedInStudentsPages
+    const [keyword, setKeyword] = useState('')
 
     const openUpdateAbsensi = (open) => {
         setShowUpdateAbsensi(open)
@@ -37,8 +38,19 @@ const StudentsPages = () => {
 
     const handleDateChange = (e) => {
         setQueryDate(e.target.value)
-        localStorage.setItem('date', e.target.value)
     }
+
+    const handleGetKeyword = (e) => {
+        setKeyword(e.target.value)
+    }
+
+    useEffect(() => {
+        console.log(showUpdateAbsensi)
+        if (showUpdateAbsensi) {
+            setKeyword('')
+            console.log('dijalankan')
+        }
+    }, [showUpdateAbsensi])
 
 
     //TODO cuman kurang di view tambah kelas
@@ -51,16 +63,9 @@ const StudentsPages = () => {
                 )}
                 <Header title={'Data Siswa'} urLTitle={'pages/students'}/>
                 <div className='w-full h-80 bg-white flex flex-col justify-between rounded-xl p-5 mt-10'>
-                    <div className='w-full flex justify-between'>
-                        <div>
-                            <h1 className='text-xl font-semibold'>Daftar Kelas</h1>
-                            <p className='text-xs tracking-widest'>Silahkan Pilih Kelas</p>
-                        </div>
-                        <div
-                            className='flex items-center gap-3 p-2 rounded-md bg-red-700 text-white font-bold cursor-pointer'>
-                            <FontAwesomeIcon icon={faAdd}/>
-                            <h1>Tambah Kelas</h1>
-                        </div>
+                    <div>
+                        <h1 className='text-xl font-semibold'>Daftar Kelas</h1>
+                        <p className='text-xs tracking-widest'>Silahkan Pilih Kelas</p>
                     </div>
                     <div>
                         <ListBoxClass queryDate={queryDate}/>
@@ -73,7 +78,6 @@ const StudentsPages = () => {
                             id="ss"
                             value={queryDate}
                             onChange={(e) => handleDateChange(e)}
-                            disabled={classSelectedInStudentsPages.id=== undefined}
                         />
                     </div>
                 </div>
@@ -85,8 +89,11 @@ const StudentsPages = () => {
                         <input
                             className='w-80 h-10 p-2 pl-12 rounded-md shadow-md focus:outline-none focus:border-teal-900 transition-all'
                             type="search"
-                            name=""
-                            placeholder='Cari Nama Siswa'/>
+                            name='keyword'
+                            value={keyword}
+                            placeholder='Cari Nama Siswa'
+                            onChange={(e) => handleGetKeyword(e)}
+                        />
                     </div>
                 </div>
                 <div className='w-full h-[700px] overflow-y-auto mt-5 bg-white rounded-xl relative'>
@@ -104,7 +111,7 @@ const StudentsPages = () => {
                         </div>
                     </div>
                     <div className='w-full px-3 overflow-y-auto mt-3'>
-                        <Table onClickOpen={openUpdateAbsensi} queryDate={queryDate}/>
+                        <Table onClickOpen={openUpdateAbsensi} classStudentsPage={classSelectedInStudentsPages} keyword={keyword}/>
                     </div>
                 </div>
             </div>

@@ -6,9 +6,9 @@ import UpdateAbsensi from "./UpdateAbsensi.jsx";
 import useClassStore from "../store/ClassStore.js";
 import useStudentsStore from "../store/StudentsStore.js";
 
-const Table = ({onClickOpen, queryDate}) => {
+const Table = ({onClickOpen, classStudentsPage, keyword}) => {
 
-    const {classSelectedInStudentsPages} = useClassStore()
+    const [classSelected, setClassSelected] = useState({})
     const {setStudentPickedInStudentsPages} = useStudentsStore()
 
     const sendShowAction = (student) => {
@@ -17,8 +17,22 @@ const Table = ({onClickOpen, queryDate}) => {
     }
 
     useEffect(() => {
-        console.log(classSelectedInStudentsPages)
-    }, [classSelectedInStudentsPages]);
+        setClassSelected(classStudentsPage)
+    }, [classStudentsPage])
+
+    useEffect(() => {
+        if(keyword !== '') {
+            const filter = classSelected?.students?.filter((student) => {
+                return student.name.toLowerCase().includes(keyword.toLowerCase())
+            })
+            setClassSelected(prevState => ({
+                ...prevState,
+                students: filter
+            }))
+        } else {
+            setClassSelected(classStudentsPage)
+        }
+    }, [keyword]);
 
     return (
         <table className='w-full h-full'>
@@ -32,7 +46,7 @@ const Table = ({onClickOpen, queryDate}) => {
                 </tr>
             </tbody>
             <tbody>
-                {classSelectedInStudentsPages?.students?.map((student) => (
+                {classSelected?.students?.map((student) => (
                     <tr className='border-b-2 border-neutral-200' key={student.nisn}>
                         <td>{student.nisn}</td>
                         <td>{student.name}</td>

@@ -1,8 +1,8 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-const Select = ({title, listOptions, onclick, nameComponent}) => {
+const Select = ({title, listOptions, onclick, nameComponent, defaultValue}) => {
     const [show, setShow] = useState(false)
     const [option, setOption] = useState('')
 
@@ -14,6 +14,10 @@ const Select = ({title, listOptions, onclick, nameComponent}) => {
         onclick(option)
         setOption(option)
     }
+
+    useEffect(() => {
+        setOption(defaultValue)
+    }, []);
 
     return (
         <div onClick={() => switchShow()}

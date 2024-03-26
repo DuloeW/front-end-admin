@@ -64,6 +64,7 @@ const AddStudent = ({classGrade}) => {
     const uploadImageAndStudentToDatabase = async (file) => {
         const form = new FormData();
         form.append('file', file)
+        console.log(file)
         try {
             setLoading(true)
             const response = await axios.post('image/uploud', form, {
@@ -95,7 +96,6 @@ const AddStudent = ({classGrade}) => {
             trueOrFalse: true
         }))
         switchShowAlert()
-        console.log(showAlert)
     }
 
     const handleError = () => {
@@ -131,7 +131,7 @@ const AddStudent = ({classGrade}) => {
             console.log(e)
         } finally {
             setLoading(false)
-            setImage('')
+            // setImage('')
             setFormStudent({
                 nisn: '',
                 name: '',

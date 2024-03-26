@@ -9,7 +9,6 @@ const PieChart = ({ data, labels }) => {
 
     useEffect(() => {
         if (data.datasets[0].data.every(val => val === 0)) {
-            console.log("Ada nilai 0 dalam data prop");
             setIsEmpty(true)
         } else {
             setIsEmpty(false)

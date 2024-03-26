@@ -1,18 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import Sidebar from '../components/Sidebar'
-import TitlePage from '../components/TitlePage'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faSchool, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
 import BoxInfoData from '../components/BoxInfoData'
 import PieChart from '../components/PieChart'
-import UserData from '../Data'
 import DigitalClock from '../components/DigitalClock'
 import ListClass from "../components/ListClass.jsx";
 import Header from "../components/Header.jsx";
 import useStudentsStore from "../store/StudentsStore.js";
 import useClassStore from "../store/ClassStore.js";
 import axios from "../axios/axios.js";
-import Cookies from "js-cookie";
 
 
 const DasboardPages = () => {
@@ -20,23 +16,22 @@ const DasboardPages = () => {
     const {classes} = useClassStore();
     const [labels, setLabels] = useState([]);
     const [chart, setChart] = useState([])
-    let dataChart = {
+    const dataChart = useMemo(() => ({
         datasets: [
             {
                 label: "Jumlah Siswa",
-                data: chart.map((data) => data.siswa),
+                data: chart.map((item) => item.siswa),
                 backgroundColor: [
                     "rgb(75,255,103)",
                     "#1ec8e0",
                     "#ffcb4b",
                     "#d50d0d",
                 ],
-                // borderColor: "black",
                 shadowColor: '0 0 20px #000',
                 borderWidth: 1,
             },
         ],
-    };
+    }), [chart]);
 
     const addDataPie = async () => {
         try {
@@ -66,7 +61,7 @@ const DasboardPages = () => {
         try {
             const body = {
                 status: status,
-                date: new Date("2024-02-10"),
+                date: new Date("2024-03-21"),
             };
             const response = await axios.post('absensi/get/status', body);
             return await response.data.data.length | 0;

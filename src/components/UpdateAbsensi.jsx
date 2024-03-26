@@ -33,7 +33,6 @@ const UpdateAbsensi = ({onClick}) => {
     }
 
     const handleSubmit = async () => {
-        console.log(absensiForm)
         try {
             await axios.patch('/absensi/update', absensiForm)
             updateSelectedClassInStudentsPages(queryDate)

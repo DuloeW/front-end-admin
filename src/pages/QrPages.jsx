@@ -61,7 +61,6 @@ const QrPages = () => {
         setProgress(0)
     };
 
-    //TODO : bug double download qr
     const handleDownloadQr = async () => {
         try {
             setLoadingDownload(true)

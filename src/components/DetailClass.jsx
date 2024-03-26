@@ -49,6 +49,10 @@ const DetailClass = ({onclick, data}) => {
         }
     }
 
+    const removeSymbol = (string) => {
+        return string?.replace(/_/g, ' ')
+    }
+
     useEffect(() => {
         const studentsLength = setLengthStudentsOfClassSelected(data.id)
         const classById =  getClassById(data.id)
@@ -64,7 +68,7 @@ const DetailClass = ({onclick, data}) => {
             </div>
             <div className='w-full h-full flex gap-10 p-8 overflow-x-hidden z-50 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-xl'>
                 <div className='w-fit h-fit p-2 shadow-md'>
-                    <h1 className='text-2xl font-bold text-primary'>XII Rekayasa Perangkat Lunak</h1>
+                    <h1 className='text-2xl font-bold text-primary'>{data.grade} {removeSymbol(data.major)}</h1>
                     <p>Jumlah Siswa {lengthStudentsOfClassSelected}</p>
                     <div className='mt-12'>
                         <div className='relative mt-2'>
