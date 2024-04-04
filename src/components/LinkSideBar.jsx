@@ -7,20 +7,21 @@
     const LinkSideBar = ({ icon, title, href }) => {
         const [active, setActive] = useState(false)
         const location = useLocation()
-        const {
-            activeUrl,
-            setActiveUrl
-        } = useStoreSideBar()
 
         const handleClick = () => {
-            setActiveUrl(href)
+            localStorage.setItem('activeUrl', href)
         }
 
         useEffect(() => {
-            if (activeUrl === href) {
-                setActive(true)
+            const activeUrl = localStorage.getItem('activeUrl')
+            if (activeUrl === null) {
+                localStorage.setItem('activeUrl', '/')
             } else {
-                setActive(false)
+                if (activeUrl === href) {
+                    setActive(true)
+                } else {
+                    setActive(false)
+                }
             }
         }, [])
 

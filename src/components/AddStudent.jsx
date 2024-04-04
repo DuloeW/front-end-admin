@@ -6,6 +6,7 @@ import {faAdd, faCheck, faX, faRefresh} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const AddStudent = ({classGrade}) => {
+    const [maxDate, setMaxDate] = useState(new Date().toISOString().split('T')[0])
     const [image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
@@ -51,8 +52,15 @@ const AddStudent = ({classGrade}) => {
 
     const handleInput = (e) => {
         const {name, value} = e.target
+        if(name === 'nisn' && !/^\d+$/.test(value)) {
+            return
+        }
+
+        if (name === 'name' && !/^[a-zA-Z\s]*$/.test(value)) {
+            return
+        }
+
         setFormStudent(prevState => ({...prevState, [name]: value}))
-        console.log(e.target.value)
     }
 
     const handleInputDate = (e) => {
@@ -64,7 +72,6 @@ const AddStudent = ({classGrade}) => {
     const uploadImageAndStudentToDatabase = async (file) => {
         const form = new FormData();
         form.append('file', file)
-        console.log(file)
         try {
             setLoading(true)
             const response = await axios.post('image/uploud', form, {
@@ -160,6 +167,17 @@ const AddStudent = ({classGrade}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const file = e.target[3].files[0]
+        const typeAcc = file?.type.replace('/', ' ').split(' ')
+        if (typeAcc[0] !== 'image') {
+            setAlertProps(prevState => ({
+                ...prevState,
+                message: 'File Harus Berupa Gambar',
+                icon: faX,
+                trueOrFalse: false
+            }))
+            switchShowAlert()
+            return
+        }
         await uploadImageAndStudentToDatabase(file)
     }
 
@@ -189,6 +207,7 @@ const AddStudent = ({classGrade}) => {
                             type="text"
                             name='nisn'
                             id='nisn'
+                            maxLength={10}
                             value={formStudents.nisn}
                             placeholder='Masukkan Nisn Siswa'
                             required={true}
@@ -222,6 +241,7 @@ const AddStudent = ({classGrade}) => {
                             name='dateOfBirth'
                             id='dateOfBirth'
                             pattern="\d{4}-\d{2}-\d{2}"
+                            max={maxDate}
                             required={true}
                             onChange={(e) => handleInputDate(e)}
                         />

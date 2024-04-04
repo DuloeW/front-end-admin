@@ -40,12 +40,17 @@ const useClassStore = create((set) => ({
     },
     getClassById: async (id) => {
         const response = await axios(`class/get/${id}`);
-        const classSelected = await response.data.data;
+        let classSelected = await response.data.data;
+
+        // Assuming each student object has an 'active' property that is either true or false
+        classSelected.students = classSelected.students.filter(student => student.status === 'ACTIVE');
         set({ classSelected });
+        // set({ lengthStudentsOfClassSelected: classSelected.students.length });
     },
     setLengthStudentsOfClassSelected: async (id) => {
         const response = await axios(`class/get/${id}`);
-        const students = await response.data.data.students;
+        let students = await response.data.data.students;
+        students = students.filter(student => student.status === 'ACTIVE');
         set({ lengthStudentsOfClassSelected: students.length });
     }
 }))

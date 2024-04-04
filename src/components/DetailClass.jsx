@@ -11,6 +11,7 @@ import useClassStore from "../store/ClassStore.js";
 
 const DetailClass = ({onclick, data}) => {
     const [showDetail, setShowDetail] = useState(false)
+    const [refreshPage, setRefreshPage] = useState(false)
     const [selectedStudent, setSelectedStudent] = useState({})
     const {
         getClassById,
@@ -19,7 +20,7 @@ const DetailClass = ({onclick, data}) => {
         setLengthStudentsOfClassSelected
     } = useClassStore()
 
-    const {students} = useStudentsStore()
+    const {students, getAllStudents} = useStudentsStore()
 
     const handleOnclick = () => {
         onclick(false)
@@ -53,11 +54,28 @@ const DetailClass = ({onclick, data}) => {
         return string?.replace(/_/g, ' ')
     }
 
+    const handleGetRefresh = (value) => {
+        setRefreshPage(value)
+        setTimeout(() => {
+            setRefreshPage(false)
+        },100)
+    }
+
     useEffect(() => {
         const studentsLength = setLengthStudentsOfClassSelected(data.id)
         const classById =  getClassById(data.id)
-        Promise.all([studentsLength, classById])
+        Promise.all([studentsLength, classById, getAllStudents()])
+        // getClassById(data.id)
     }, [students.length])
+
+    useEffect(() => {
+        if(refreshPage) {
+            Promise.all([getClassById(data.id),
+                setLengthStudentsOfClassSelected(data.id),
+                getAllStudents()])
+        }
+    }, [refreshPage]);
+
 
 
     return (
@@ -103,7 +121,7 @@ const DetailClass = ({onclick, data}) => {
                     </div>
                 </div>
                 {showDetail ? (
-                    <DetailStudent student={selectedStudent}/>
+                    <DetailStudent student={selectedStudent} refresh={handleGetRefresh}/>
                 ) : (
                     <AddStudent classGrade={data.id}/>
                 )}

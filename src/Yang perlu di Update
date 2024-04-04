@@ -1,10 +1,8 @@
 - saat token exprd dan login, sesudah login benar, fetch API nya tidak mau jalan (render datanya)
-- alert saat error 500 di add student
-- keamanan di penginputan data saat add student
-- qenerate laporan & qr masih belum murni loadig nya
+- responsif belum
+- laporan siswa yang non aktif masih di buat!!!
+
 - halaman detail admin belum
-- saat di refresh halaman, style sidebar tidak seperti yang diinginkan
 
 
-
-- update data student belum
+-bug sidebar

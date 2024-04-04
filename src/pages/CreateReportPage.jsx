@@ -65,7 +65,7 @@ const CreateReportPage = () => {
                 }
                 return newProgress;
             });
-        }, 10);
+        }, 2);
         setProgress(0)
     };
     const handleDownloadQr = async () => {

@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Sidebar from '../components/Sidebar'
-import TitlePage from "../components/TitlePage.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAdd, faGear, faQrcode, faRefresh, faUser} from "@fortawesome/free-solid-svg-icons";
-import ListBoxClass from "../components/ListBoxClass.jsx";
+import {faQrcode, faRefresh} from "@fortawesome/free-solid-svg-icons";
 import Select from "../components/Select.jsx";
 import Header from "../components/Header.jsx";
 import useClassStore from "../store/ClassStore.js";
@@ -57,7 +55,7 @@ const QrPages = () => {
                 }
                 return newProgress;
             });
-        }, 50);
+        }, 2);
         setProgress(0)
     };
 
@@ -87,6 +85,7 @@ const QrPages = () => {
     useEffect(() => {
         const grades = ['X', 'XI', 'XII']
         const formatedData = new Set()
+        console.log(classes)
 
         grades.forEach(grade => {
             const filteredByGrade = classes.filter(item => item.grade === grade)
@@ -126,10 +125,18 @@ const QrPages = () => {
                             <h1 className='text-3xl font-bold'>Silahkan Pilih Kelas</h1>
                         </div>
                         <div className='flex flex-col gap-5 mt-5'>
-                            <Select title='Kelas' listOptions={grades} nameComponent={'Kelas'}
-                                    onclick={handleClassSelect}/>
-                            <Select title='Jurusan' listOptions={Array.from(major)} nameComponent={'Jurusan'}
-                                    onclick={handleMajorSelect}/>
+                            <Select
+                                title='Kelas'
+                                listOptions={grades}
+                                nameComponent={'Kelas'}
+                                isUseDefaultValue={false}
+                                onclick={handleClassSelect}/>
+                            <Select
+                                title='Jurusan'
+                                listOptions={Array.from(major)}
+                                nameComponent={'Jurusan'}
+                                isUseDefaultValue={false}
+                                onclick={handleMajorSelect}/>
                             <button className={`w-full h-12 bg-teal-900 text-white rounded-md
                                 ${disbleButton ? 'cursor-not-allowed opacity-20' : 'cursor-pointer opacity-100'}
                             `}

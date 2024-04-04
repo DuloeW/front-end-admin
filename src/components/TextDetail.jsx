@@ -4,8 +4,9 @@ import Select from "./Select.jsx";
 
 
 //TODO membuat transfer data dari child ke parent untuk melakukan update
-const TextDetail = ({title, value, update }) => {
+const TextDetail = ({title, value, update, valueSent }) => {
     const [major, setMajor] = useState(new Set())
+    const [data, setData] = useState(value)
     const [grade, setGrade] = useState(['X', 'XI', 'XII'])
     const [formData, setFormData] = useState({})
     const [classAndMajor, setClassAndMajor] = useState({
@@ -25,6 +26,7 @@ const TextDetail = ({title, value, update }) => {
                 grade: option
             }
         })
+        valueSent({id: 2, grade: option})
     }
 
     const handleMajorSelect = (option) => {
@@ -34,7 +36,15 @@ const TextDetail = ({title, value, update }) => {
                 major: option
             }
         })
+        valueSent({id: 3, major: option})
     }
+
+    const handleChangeName = (e) => {
+        const name = e.target.value
+        setData(name)
+        valueSent({id: 1, name})
+    }
+
 
     useEffect(() => {
         const grades = ['X', 'XI', 'XII']
@@ -49,15 +59,19 @@ const TextDetail = ({title, value, update }) => {
         setMajor(formatedData);
     }, []);
 
+    useEffect(() => {
+        setData(value)
+    }, [value]);
+
     return (
         <div className='w-full'>
             <h2>{title}</h2>
             <input className={`p-2 w-full outline-none border-none bg-white shadow-md rounded-md
                 ${title === 'Jurusan' || title === 'Kelas' ? 'hidden' : ''}
             `}
-                   name=''
                    disabled={!update}
-                   value={value}
+                   value={data}
+                   onChange={(e) => handleChangeName(e)}
             />
             {title === 'Kelas' && (
                  update ? (
@@ -66,6 +80,7 @@ const TextDetail = ({title, value, update }) => {
                         listOptions={grade}
                         nameComponent={title}
                         defaultValue={value}
+                        isUseDefaultValue={true}
                         onclick={handleClassSelect}/>
                 ) : (
                     <input
@@ -82,6 +97,7 @@ const TextDetail = ({title, value, update }) => {
                         title={title}
                         listOptions={Array.from(major)}
                         nameComponent={title}
+                        isUseDefaultValue={true}
                         defaultValue={removeSymbol(value)}
                         onclick={handleMajorSelect}/>
                 ) : (
