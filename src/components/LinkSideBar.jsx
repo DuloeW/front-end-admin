@@ -25,6 +25,10 @@
             }
         }, [])
 
+        useEffect(() => {
+            localStorage.setItem('activeUrl', location.pathname)
+        }, [location.pathname])
+
         return (
             <Link to={href}>
                 <button
