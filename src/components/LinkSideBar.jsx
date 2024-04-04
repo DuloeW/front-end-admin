@@ -34,7 +34,7 @@
                         ${active ? 'bg-white text-primary' : 'bg-primary text-white'}
                     `}>
                     <FontAwesomeIcon icon={icon} />
-                    <p className='font-semibold'>
+                    <p className='font-semibold hidden sm:block'>
                         {title}
                     </p>
                 </button>

@@ -94,6 +94,7 @@ const DetailStudent = ({student, refresh}) => {
             }
             const response =  await axios.put('/students/update', form)
             sendRequestRefresh()
+            setIsUpdate(false)
             showAlert('Berhasil Nonaktifkan Siswa', faCheck, true)
             setTimeout(() => {
                 dontShowAlert()

@@ -38,6 +38,7 @@ const StudentsPages = () => {
 
     const handleDateChange = (e) => {
         setQueryDate(e.target.value)
+        localStorage.setItem('date', e.target.value)
     }
 
     const handleGetKeyword = (e) => {
@@ -45,15 +46,20 @@ const StudentsPages = () => {
     }
 
     useEffect(() => {
-        console.log(showUpdateAbsensi)
+        if (localStorage.getItem('date') !== null) {
+            setQueryDate(localStorage.getItem('date'))
+        } else {
+            localStorage.setItem('date', new Date().toISOString().split('T')[0])
+        }
+    }, [])
+
+    useEffect(() => {
         if (showUpdateAbsensi) {
             setKeyword('')
-            console.log('dijalankan')
         }
     }, [showUpdateAbsensi])
 
 
-    //TODO cuman kurang di view tambah kelas
     return (
         <div className='w-full h-fit bg-neutral-200 flex'>
             <Sidebar/>

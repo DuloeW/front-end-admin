@@ -1,8 +1,4 @@
 - saat token exprd dan login, sesudah login benar, fetch API nya tidak mau jalan (render datanya)
 - responsif belum
-- laporan siswa yang non aktif masih di buat!!!
-
-- halaman detail admin belum
-
 
 -bug sidebar

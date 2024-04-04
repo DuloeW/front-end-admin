@@ -12,6 +12,10 @@ const Table = ({onClickOpen, classStudentsPage, keyword}) => {
     const {setStudentPickedInStudentsPages} = useStudentsStore()
 
     const sendShowAction = (student) => {
+        if(student.absensi === undefined) {
+            alert('Siswa ini belum absen')
+            return
+        }
         onClickOpen(true)
         setStudentPickedInStudentsPages(student)
     }

@@ -87,11 +87,13 @@ const DasboardPages = () => {
             <Sidebar />
             <div className='w-11/12 h-fit p-5 flex flex-col gap-11'>
                 <Header title={'Dasboard Utama'} urLTitle={'pages/dasboard'}/>
-                <section className='w-full grid grid-rows-1 grid-cols-2 gap-10'>
+                <section className='w-full grid lg:grid-rows-1 lg:grid-cols-2 gap-10'>
                     <BoxInfoData icon={faSchool} title={"Jumlah Kelas"} data={classes.length} />
                     <BoxInfoData icon={faUsers} title={"Jumlah Siswa"} data={students.length} />
                     <PieChart data={dataChart} labels={labels}/>
-                    <DigitalClock />
+                    <div className="w-full flex justify-center">
+                        <DigitalClock />
+                    </div>
                 </section>
                 <section className='w-full relative'>
                     <ListClass classes={classes}/>
