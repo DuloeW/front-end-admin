@@ -47,9 +47,11 @@ const StudentsPages = () => {
 
     useEffect(() => {
         if (localStorage.getItem('date') !== null) {
+            localStorage.setItem('date', new Date().toISOString().split('T')[0])
             setQueryDate(localStorage.getItem('date'))
         } else {
             localStorage.setItem('date', new Date().toISOString().split('T')[0])
+            setQueryDate(localStorage.getItem('date'))
         }
     }, [])
 
