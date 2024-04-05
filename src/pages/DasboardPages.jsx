@@ -61,7 +61,7 @@ const DasboardPages = () => {
         try {
             const body = {
                 status: status,
-                date: new Date("2024-03-21"),
+                date: new Date().toISOString().split('T')[0],
             };
             const response = await axios.post('absensi/get/status', body);
             return await response.data.data.length | 0;
