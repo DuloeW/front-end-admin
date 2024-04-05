@@ -68,12 +68,12 @@ const StudentsPages = () => {
                     <UpdateAbsensi onClick={closeUpdateAbsensi}/>
                 )}
                 <Header title={'Data Siswa'} urLTitle={'pages/students'}/>
-                <div className='w-full h-80 bg-white flex flex-col justify-between rounded-xl p-5 mt-10'>
+                <div className='w-full h-fit lg:h-80 bg-white flex flex-col justify-between rounded-xl p-5 mt-10'>
                     <div>
                         <h1 className='text-xl font-semibold'>Daftar Kelas</h1>
                         <p className='text-xs tracking-widest'>Silahkan Pilih Kelas</p>
                     </div>
-                    <div>
+                    <div className='mt-3 lg:mt-0'>
                         <ListBoxClass queryDate={queryDate}/>
                     </div>
                     <div className='border-b-2 w-fit'>
@@ -107,7 +107,7 @@ const StudentsPages = () => {
                         <div className='flex gap-10'>
                             <div>
                                 <h1 className='text-xl font-semibold'>Absen Siswa</h1>
-                                <p>{queryDate}</p>
+                                <p className="text-[10px] md:text-base">{queryDate}</p>
                             </div>
                         </div>
                         <div className='flex items-center gap-4 relative'>

@@ -56,7 +56,7 @@ const UpdateAbsensi = ({onClick}) => {
             <div className='w-full h-full bg-neutral-200 absolute opacity-80 z-50'></div>
             <div className='w-full h-screen absolute z-50'>
                 <div>
-                    <div className='w-1/2 h-auto bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-md'>
+                    <div className='w-10/12 md:w-1/2 h-auto bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-md'>
                         <h1 className='text-xl font-semibold'>Update Absensi</h1>
                         <div className='mt-5'>
                             <div>

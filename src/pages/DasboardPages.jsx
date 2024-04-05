@@ -91,7 +91,7 @@ const DasboardPages = () => {
                     <BoxInfoData icon={faSchool} title={"Jumlah Kelas"} data={classes.length} />
                     <BoxInfoData icon={faUsers} title={"Jumlah Siswa"} data={students.length} />
                     <PieChart data={dataChart} labels={labels}/>
-                    <div className="w-full flex justify-center">
+                    <div className="w-full hidden md:flex md:justify-center">
                         <DigitalClock />
                     </div>
                 </section>

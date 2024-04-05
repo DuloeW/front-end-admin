@@ -42,22 +42,22 @@ const Table = ({onClickOpen, classStudentsPage, keyword}) => {
         <table className='w-full h-full'>
             <tbody>
                 <tr className='border-b-2 border-b-neutral-200'>
-                    <th>Nisn</th>
-                    <th>Nama Siswa</th>
-                    <th>Kehadiran</th>
-                    <th>Jam Masuk</th>
-                    <th className='text-center'>Aksi</th>
+                    <th className="text-sm md:text-base">Nisn</th>
+                    <th className="text-sm md:text-base">Nama Siswa</th>
+                    <th className="text-sm md:text-base">Kehadiran</th>
+                    <th className="text-sm md:text-base">Jam Masuk</th>
+                    <th className='text-center text-sm md:text-base'>Aksi</th>
                 </tr>
             </tbody>
             <tbody>
                 {classSelected?.students?.map((student) => (
-                    <tr className='border-b-2 border-neutral-200' key={student.nisn}>
-                        <td>{student.nisn}</td>
-                        <td>{student.name}</td>
-                        <td>{student.absensi?.status}</td>
-                        <td>{student.absensi?.time}</td>
+                    <tr className='border-b-2 border-neutral-200 border-spacing-2' key={student.nisn}>
+                        <td className="text-sm md:text-base">{student.nisn}</td>
+                        <td className="text-sm md:text-base">{student.name}</td>
+                        <td className="text-sm md:text-base">{student.absensi?.status}</td>
+                        <td className="text-sm md:text-base">{student.absensi?.time}</td>
                         <td onClick={() => sendShowAction(student)}>
-                            <p className='bg-blue-700 text-white font-semibold text-center rounded-md py-2 cursor-pointer'>Edit</p>
+                            <p className='bg-blue-700 text-sm md:text-base text-white font-semibold text-center rounded-md py-2 cursor-pointer'>Edit</p>
                         </td>
                     </tr>
                 ))}

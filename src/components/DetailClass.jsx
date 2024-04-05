@@ -84,7 +84,8 @@ const DetailClass = ({onclick, data}) => {
                 <FontAwesomeIcon icon={faUser} onClick={() => openShowDetail()} className='text-2xl p-2 bg-primary cursor-pointer rounded-md text-white m-8'/>
                 <FontAwesomeIcon icon={faAdd} onClick={() => closeShowDetail()} className='text-2xl p-2 bg-primary cursor-pointer rounded-md text-white m-8'/>
             </div>
-            <div className='w-full h-full flex gap-10 p-8 overflow-x-hidden z-50 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-xl'>
+            <div
+                className='w-full h-full flex flex-col lg:flex-row gap-10 p-8 overflow-x-hidden z-50 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-xl'>
                 <div className='w-fit h-fit p-2 shadow-md'>
                     <h1 className='text-2xl font-bold text-primary'>{data.grade} {removeSymbol(data.major)}</h1>
                     <p>Jumlah Siswa {lengthStudentsOfClassSelected}</p>
@@ -117,7 +118,8 @@ const DetailClass = ({onclick, data}) => {
                             )}
                         </div>
                         <button onClick={() => handleOnclick()}
-                            className='w-full h-10 bg-red-900 rounded-md text-white font-semibold mt-4'>Keluar</button>
+                                className='w-full h-10 bg-red-900 rounded-md text-white font-semibold mt-4'>Keluar
+                        </button>
                     </div>
                 </div>
                 {showDetail ? (

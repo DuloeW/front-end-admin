@@ -8,7 +8,7 @@ const links = [
   {
     id: 1,
     icon: faHouse,
-    title: 'Home',
+    title: 'Halaman Utama',
     href: '/'
   },
   {
@@ -33,12 +33,12 @@ const links = [
 
 const Sidebar = () => {
   return (
-    <div className='max-w-96 bg-primary relative w-72 p-2 gap-6'>
-      <div className='py-2 flex border-b-2 border-b-neutral-200 relative'>
-        <img src={smkIcon} width={30} alt='iconSmk' className='absolute top-6 right-0 p-1 rounded-full bg-white' />
+    <div className='sm:w-96 w-fit bg-primary relative p-2 gap-6'>
+      <div className='py-2 flex sm:border-b-2 sm:border-b-neutral-200 relative'>
+        <img src={smkIcon} width={30} alt='iconSmk' className='absolute sm:block hidden top-6 right-0 p-1 rounded-full bg-white' />
         <div className='text-neutral-100'>
-          <h1 className='text-2xl font-bold'>Admin Absensi</h1>
-          <h1 className='text-xs font-bold'>SMK NEGERI 2 TABANAN</h1>
+          <h1 className='text-2xl font-bold sm:block hidden'>Admin Absensi</h1>
+          <h1 className='text-xs font-bold sm:block hidden'>SMK NEGERI 2 TABANAN</h1>
         </div>
       </div>
       <div className='flex flex-col gap-5 mt-5'>

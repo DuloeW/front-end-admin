@@ -122,11 +122,11 @@ const CreateReportPage = () => {
     }, [progress]);
 
     return (
-        <div className='w-full h-screen flex bg-neutral-200'>
+        <div className='w-full h-fit md:h-screen flex bg-neutral-200'>
             <Sidebar/>
             <div className='w-11/12 h-fit p-5'>
                 <Header title={'Buat Kode Qr'} urLTitle={'pages/qr'}/>
-                <div className='w-full grid grid-cols-2 grid-rows-1 gap-6 rounded-xl mt-10'>
+                <div className='w-full grid md:grid-cols-2 grid-rows-1 gap-6 rounded-xl mt-10'>
                     <div className='w-full p-5 rounded-xl bg-white h-fit'>
                         <div>
                             <h1 className='text-3xl font-bold'>Silahkan Pilih Kelas</h1>
@@ -148,12 +148,12 @@ const CreateReportPage = () => {
                                 max={100}>{progress}%
                             </progress>
                             <div className='w-full h-80 bg-neutral-200 rounded-xl mt-5 grid place-items-center'>
-                                <div className='w-72 h-72 bg-white rounded-xl p-5 grid place-items-center'>
+                                <div className='w-4/5 h-4/5 lg:h-72 bg-white rounded-xl p-5 grid place-items-center'>
                                     {loadingGenerate || loadingDownload ? (
                                         <FontAwesomeIcon icon={faRefresh}
-                                                         className='text-9xl text-teal-900 animate-spin'/>
+                                                         className='md:text-9xl text-7xl text-teal-900 animate-spin'/>
                                     ) : (
-                                        <FontAwesomeIcon icon={faNoteSticky} className='text-9xl text-teal-900'/>
+                                        <FontAwesomeIcon icon={faNoteSticky} className='md:text-9xl text-7xl text-teal-900'/>
                                     )}
                                 </div>
                             </div>
