@@ -86,7 +86,7 @@ const DasboardPages = () => {
         <div className='w-full h-fit bg-neutral-200 flex overflow-x-hidden overflow-y-auto'>
             <Sidebar />
             <div className='w-11/12 h-fit p-5 flex flex-col gap-11'>
-                <Header title={'Dasboard Utama'} urLTitle={'pages/dasboard'}/>
+                <Header title={'Dashboard Utama'} urLTitle={'pages/dashboard'}/>
                 <section className='w-full grid lg:grid-rows-1 lg:grid-cols-2 gap-10'>
                     <BoxInfoData icon={faSchool} title={"Jumlah Kelas"} data={classes.length} />
                     <BoxInfoData icon={faUsers} title={"Jumlah Siswa"} data={students.length} />
