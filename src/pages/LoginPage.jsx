@@ -81,7 +81,7 @@ const LoginPage = () => {
     }
 
     return (
-        <div className='w-full h-screen relative flex justify-between'>
+        <div className='w-full h-screen relative flex flex-col-reverse md:flex-row justify-between'>
             <div className='w-full h-full p-10'>
                 <div className='w-11/12 h-full flex justify-center items-center flex-col shadow-xl rounded-xl'>
                     <h1 className='text-4xl font-bold text-teal-900 text-center'>Login</h1>
@@ -119,8 +119,11 @@ const LoginPage = () => {
                     <Alert icon={alertProps.icon} message={alertProps.message} trueOrFalse={alertProps.trueOrFalse}/>
                 </div>
             )}
-            <div className='w-full h-full grid place-items-center'>
-                <img src='/login.jpg' width={500} alt={'Login'}/>
+            <div className='w-full h-fit md:h-fit sm:h-full grid place-items-center'>
+                <img className="w-32 sm:h-[200px] sm:w-[200px] md:w-[500px] md:h-[500px]"
+                     src='/login.jpg'
+                     width={500}
+                     alt={'Login'}/>
             </div>
         </div>
     );
