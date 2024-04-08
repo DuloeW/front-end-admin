@@ -26,7 +26,7 @@ const Header = ({urLTitle, title}) => {
                     className='w-32 h-fit flex relative items-center justify-evenly bg-white p-2 rounded-2xl text-neutral-700'>
                     <FontAwesomeIcon icon={faGear} onClick={() => swticthShow()} className='text-2xl'/>
                     {show && (
-                        <span className='text-sm font-bold absolute -left-16 p-3 rounded-md bg-red-600 text-white'
+                        <span className='text-sm font-bold absolute cursor-pointer -left-16 p-3 rounded-md bg-red-600 text-white'
                             onClick={() => logOut()}>
                             Log Out
                         </span>

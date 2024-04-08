@@ -9,6 +9,7 @@ import StudentsPages from "./pages/StudentsPages.jsx";
 import QrPages from "./pages/QrPages.jsx";
 import CreateReportPage from "./pages/CreateReportPage.jsx";
 import './index.css'
+import PageNotFound from "./components/PageNotFound.jsx";
 
 const App = () => {
     const {getAllStudents} = useStudentsStore();
@@ -62,7 +63,7 @@ const App = () => {
         {
             name: 'not-found',
             path: '*',
-            element: <h1>404 Not Found</h1>
+            element: <PageNotFound/>
         }
     ])
 
