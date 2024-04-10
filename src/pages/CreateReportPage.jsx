@@ -18,7 +18,7 @@ import useClassStore from "../store/ClassStore.js";
 import axios from "../axios/axios.js";
 
 const CreateReportPage = () => {
-    const {classes} = useClassStore()
+    const {classes, getAllClasses} = useClassStore()
     const [major, setMajor] = useState(new Set())
     const [grades, setGrades] = useState(['X', 'XI', 'XII'])
     const [progress, setProgress] = useState(0)
@@ -120,6 +120,10 @@ const CreateReportPage = () => {
             setDisableButton2(true)
         }
     }, [progress]);
+
+    useEffect(() => {
+        getAllClasses()
+    }, [])
 
     return (
         <div className='w-full h-fit md:h-screen flex bg-neutral-200'>

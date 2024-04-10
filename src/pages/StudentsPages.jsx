@@ -20,7 +20,7 @@ const StudentsPages = () => {
 
     const [showUpdateAbsensi, setShowUpdateAbsensi] = useState(false)
     const [queryDate, setQueryDate] = useState(new Date().toISOString().split('T')[0])
-    const {classSelectedInStudentsPages} = useClassStore()
+    const {classSelectedInStudentsPages, getAllClasses} = useClassStore()
     const {grade, major} = classSelectedInStudentsPages
     const [keyword, setKeyword] = useState('')
 
@@ -60,6 +60,10 @@ const StudentsPages = () => {
             setKeyword('')
         }
     }, [showUpdateAbsensi])
+
+    useEffect(() => {
+        getAllClasses()
+    }, [])
 
 
     return (

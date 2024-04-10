@@ -1,6 +1,4 @@
-import useStudentsStore from "./store/StudentsStore.js";
-import useClassStore from "./store/ClassStore.js";
-import React, {useEffect} from "react";
+import React from "react";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
@@ -12,12 +10,6 @@ import './index.css'
 import PageNotFound from "./components/PageNotFound.jsx";
 
 const App = () => {
-    const {getAllStudents} = useStudentsStore();
-    const {getAllClasses} = useClassStore();
-    useEffect(() => {
-        getAllStudents()
-        getAllClasses()
-    }, []);
     const router = createBrowserRouter([
         {
             name: 'login',

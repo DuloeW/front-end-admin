@@ -8,7 +8,7 @@ import useClassStore from "../store/ClassStore.js";
 import axios from "../axios/axios.js";
 
 const QrPages = () => {
-    const {classes} = useClassStore()
+    const {classes, getAllClasses} = useClassStore()
     const [major, setMajor] = useState(new Set())
     const [grades, setGrades] = useState(['X', 'XI', 'XII'])
     const [progress, setProgress] = useState(0)
@@ -104,6 +104,10 @@ const QrPages = () => {
             setDisableButton(false)
         }
     }, [classAndMajor])
+
+    useEffect(() => {
+        getAllClasses()
+    }, [])
 
     useEffect(() => {
         if (progress === 100) {

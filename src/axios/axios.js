@@ -1,9 +1,19 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const token = Cookies.get("token")
 axios.defaults.baseURL = "http://localhost:8790/api/v1/";
-// axios.defaults.headers.post["Content-Type"] = "application/json";
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
+// Set up a request interceptor
+axios.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    let token = Cookies.get("token");
+    if (token) {
+        config.headers.Authorization = 'Bearer ' + token;
+    }
+    return config;
+}, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+});
 
 export default axios;

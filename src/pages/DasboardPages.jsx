@@ -9,11 +9,13 @@ import Header from "../components/Header.jsx";
 import useStudentsStore from "../store/StudentsStore.js";
 import useClassStore from "../store/ClassStore.js";
 import axios from "../axios/axios.js";
+import Cookies from "js-cookie";
 
 
 const DasboardPages = () => {
+    const token = Cookies.get('token');
     const {students, getAllStudents} = useStudentsStore();
-    const {classes} = useClassStore();
+    const {classes, getAllClasses} = useClassStore();
     const [labels, setLabels] = useState([]);
     const [chart, setChart] = useState([])
     const dataChart = useMemo(() => ({
@@ -80,6 +82,10 @@ const DasboardPages = () => {
     useEffect(() => {
         getAllStudents()
     }, [students.length]);
+
+    useEffect(() => {
+        getAllClasses()
+    }, [])
 
 
     return (
