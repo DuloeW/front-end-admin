@@ -166,19 +166,38 @@ const AddStudent = ({classGrade}) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const file = e.target[3].files[0]
-        const typeAcc = file?.type.replace('/', ' ').split(' ')
-        if (typeAcc[0] !== 'image') {
+        try {
+            const file = e.target[3].files[0]
+            const typeAcc = file?.type.replace('/', ' ').split(' ')
+            if (typeAcc[0] !== 'image') {
+                setAlertProps(prevState => ({
+                    ...prevState,
+                    message: 'File Harus Berupa Gambar',
+                    icon: faX,
+                    trueOrFalse: false
+                }))
+                switchShowAlert()
+                return
+            }
+            const response = await uploadImageAndStudentToDatabase(file)
+            if (response.code === 'ERR_BAD_REQUEST') {
+                setAlertProps(prevState => ({
+                    ...prevState,
+                    message: 'Gagal Tambah Siswa',
+                    icon: faX,
+                    trueOrFalse: false
+                }))
+                switchShowAlert()
+            }
+        } catch (error) {
             setAlertProps(prevState => ({
                 ...prevState,
-                message: 'File Harus Berupa Gambar',
+                message: 'Gagal Tambah Siswa',
                 icon: faX,
                 trueOrFalse: false
             }))
             switchShowAlert()
-            return
         }
-        await uploadImageAndStudentToDatabase(file)
     }
 
     const switchShowAlert = () => {

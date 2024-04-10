@@ -16,7 +16,6 @@ const useStudentsStore = create((set) => ({
             set({ students });
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                alert('Token expired, please login again')
                 window.location.href = '/login';
             }
         }
@@ -26,7 +25,6 @@ const useStudentsStore = create((set) => ({
             return await axios.post('students/create', data);
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                alert('Token expired, please login again')
                 window.location.href = '/login';
             }
         }

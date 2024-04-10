@@ -139,14 +139,30 @@ const DetailStudent = ({student, refresh}) => {
         try {
             setLoading(true)
             if(file === undefined) {
-                const response = await updateStudent()
-                console.log(response)
-                showAlert('Berhasil Update Data', faCheck, true)
-                setTimeout(() => {
-                    dontShowAlert()
-                    changeToCloseUpdate()
-                }, 1000)
-                return
+                try {
+                    const response = await updateStudent()
+                    console.log(response)
+                    if (response.code === 'ERR_BAD_REQUEST') {
+                        showAlert('Gagal Update Data', faThumbsDown, false)
+                        setTimeout(() => {
+                            dontShowAlert()
+                        }, 1000)
+                        return
+                    }
+                    showAlert('Berhasil Update Data', faCheck, true)
+                    setTimeout(() => {
+                        dontShowAlert()
+                        changeToCloseUpdate()
+                    }, 1000)
+                    return
+                }catch (error)  {
+                    console.log(error)
+                    showAlert('Gagal Update Data', faThumbsDown, false)
+                    setTimeout(() => {
+                        dontShowAlert()
+                    }, 1000)
+                    return
+                }
             } else if (typeAcc[0] !== 'image') {
                 showAlert('File Harus Berupa Gambar', faThumbsDown, false)
                 setTimeout(() => {

@@ -46,7 +46,6 @@ const useClassStore = create((set) => ({
             set({ classes });
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                alert('Token expired, please login again')
                 window.location.href = '/login';
             }
         }
