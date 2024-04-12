@@ -1,6 +1,6 @@
 import {create} from "zustand";
 import axios from "../axios/axios.js";
-import StudentsStore from "./StudentsStore.js";
+import {goToLoginPage} from "../util/Method.js";
 
 const useClassStore = create((set) => ({
     classes: [],
@@ -35,7 +35,7 @@ const useClassStore = create((set) => ({
             }}));
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                window.location.href = '/login';
+                goToLoginPage()
             }
         }
     },
@@ -46,7 +46,7 @@ const useClassStore = create((set) => ({
             set({ classes });
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                window.location.href = '/login';
+                goToLoginPage()
             }
         }
     },
@@ -60,7 +60,7 @@ const useClassStore = create((set) => ({
             set({ classSelected });
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                window.location.href = '/login';
+                goToLoginPage()
             }
         }
     },
@@ -72,7 +72,7 @@ const useClassStore = create((set) => ({
             set({ lengthStudentsOfClassSelected: students.length });
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                window.location.href = '/login';
+                goToLoginPage()
             }
         }
     }

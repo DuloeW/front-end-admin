@@ -80,6 +80,14 @@ const LoginPage = () => {
         setIsShowPassword(!isShowPassword);
     }
 
+    useEffect(() => {
+        const unauthorized = localStorage.getItem('unauthorized')
+
+        if (unauthorized === '1') {
+            alert('Sesi anda telah berakhir, silahkan login kembali')
+        }
+    }, [])
+
     return (
         <div className='w-full h-screen relative flex flex-col-reverse md:flex-row justify-between'>
             <div className='w-full h-full p-10'>

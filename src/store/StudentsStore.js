@@ -1,5 +1,6 @@
 import axios from "../axios/axios.js";
 import {create} from "zustand";
+import {goToLoginPage} from "../util/Method.js";
 
 const useStudentsStore = create((set) => ({
     students: [],
@@ -16,7 +17,7 @@ const useStudentsStore = create((set) => ({
             set({ students });
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                window.location.href = '/login';
+                goToLoginPage()
             }
         }
     },
@@ -25,7 +26,7 @@ const useStudentsStore = create((set) => ({
             return await axios.post('students/create', data);
         } catch (error) {
             if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
-                window.location.href = '/login';
+                goToLoginPage()
             }
         }
     },
