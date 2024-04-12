@@ -5,6 +5,7 @@ import axios from "../axios/axios.js";
 import Alert from "./Alert.jsx";
 import {faCheck, faThumbsDown} from "@fortawesome/free-solid-svg-icons";
 import DecisionAlert from "./DecisionAlert.jsx";
+import {goToLoginPage} from "../util/Method.js";
 
 
 const DetailStudent = ({student, refresh}) => {
@@ -102,7 +103,10 @@ const DetailStudent = ({student, refresh}) => {
             }, 1000)
         } catch (error) {
             console.log(error)
-            showAlert('Gagal Nonaktifkan Siswa', faThumbsDown, true)
+            showAlert('Gagal Nonaktifkan Siswa', faThumbsDown, false)
+            if(error.code === 'ERR_BAD_REQUEST') {
+                goToLoginPage()
+            }
             setTimeout(() => {
                 dontShowAlert()
                 changeToCloseUpdate()

@@ -2,6 +2,7 @@ import useStudentsStore from "../store/StudentsStore.js";
 import useClassStore from "../store/ClassStore.js";
 import {useEffect, useState} from "react";
 import axios from "../axios/axios.js";
+import {goToLoginPage} from "../util/Method.js";
 
 const UpdateAbsensi = ({onClick}) => {
 
@@ -34,11 +35,13 @@ const UpdateAbsensi = ({onClick}) => {
 
     const handleSubmit = async () => {
         try {
-            const reponse = await axios.patch('/absensi/update', absensiForm)
-            console.log(reponse.data)
+            await axios.patch('/absensi/update', absensiForm)
             updateSelectedClassInStudentsPages(queryDate)
         } catch (e) {
             console.log(e)
+            if(e.code === 'ERR_BAD_REQUEST') {
+                goToLoginPage()
+            }
         }
     }
 

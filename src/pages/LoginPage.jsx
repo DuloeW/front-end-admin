@@ -85,6 +85,7 @@ const LoginPage = () => {
 
         if (unauthorized === '1') {
             alert('Sesi anda telah berakhir, silahkan login kembali')
+            localStorage.setItem('unauthorized', "0")
         }
     }, [])
 
