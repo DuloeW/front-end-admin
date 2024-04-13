@@ -16,7 +16,7 @@ const PieChart = ({ data, labels }) => {
     }, [data]);
 
     return (
-        <div className='w-full h-fit bg-white p-4 rounded-2xl'>
+        <div className='w-full lg:w-full h-fit bg-white p-4 rounded-2xl'>
             <div>
                 <h1 className='text-primary text-2xl font-extrabold'>Absensi Siswa Hari Ini</h1>
             </div>

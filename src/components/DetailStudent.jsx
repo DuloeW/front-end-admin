@@ -256,7 +256,7 @@ const DetailStudent = ({student, refresh}) => {
                                 <p className='mt-3 text-red-800 text-xs cursor-pointer underline'
                                     onClick={() => openDecision()}
                                 >Nonaktifkan Siswa</p>
-                                <div className='w-full mt-4 flex gap-5'>
+                                <div className='w-full mt-4 flex flex-col lg:flex-row gap-5'>
                                     <button className='px-10 py-2 bg-green-500 rounded-md text-white font-semibold'
                                             type='submit'
                                             disabled={showDecision}
@@ -281,10 +281,10 @@ const DetailStudent = ({student, refresh}) => {
             </div>
             <div className='mt-12 w-full h-1/2 relative'>
                 <h1 className='text-primary text-3xl font-bold'>Absensi Siswa</h1>
-                <div className='w-full flex flex-wrap gap-2 border-t-2 pt-2 mt-3 h-fit overflow-y-auto'>
+                <div className='w-full flex flex-col md:flex-wrap md:flex-row items-center md:items-start gap-2 border-t-2 pt-2 mt-3 h-fit overflow-y-auto'>
                     {student?.absensi?.map((absen) => (
-                        <div key={absen.id} className='p-3 w-fit font-semibold rounded-md bg-white shadow-md'>
-                            <div className='flex gap-5'>
+                        <div key={absen.id} className='p-3 w-fit font-semibold rounded-md bg-white border-2'>
+                            <div className='flex gap-5 text-[10px] lg:text-base'>
                                 <p>{absen.date}</p>
                                 <p>{absen.time} WITA</p>
                             </div>

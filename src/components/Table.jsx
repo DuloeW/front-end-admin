@@ -39,30 +39,32 @@ const Table = ({onClickOpen, classStudentsPage, keyword}) => {
     }, [keyword]);
 
     return (
-        <table className='w-full h-full'>
-            <tbody>
-                <tr className='border-b-2 border-b-neutral-200'>
-                    <th className="text-sm md:text-base">Nisn</th>
-                    <th className="text-sm md:text-base">Nama Siswa</th>
-                    <th className="text-sm md:text-base">Kehadiran</th>
-                    <th className="text-sm md:text-base">Jam Masuk</th>
-                    <th className='text-center text-sm md:text-base'>Aksi</th>
+        <div className='overflow-x-auto'>
+            <table className='w-[550px] md:w-full h-full'>
+                <tbody>
+                <tr className='border-b-2 border-b-neutral-200 space-x-4'>
+                    <th className="text-xs sm:text-sm md:text-base">Nisn</th>
+                    <th className="text-xs sm:text-sm md:text-base borderspa">Nama Siswa</th>
+                    <th className="text-xs sm:text-sm md:text-base">Kehadiran</th>
+                    <th className="text-xs sm:text-sm md:text-base">Jam Masuk</th>
+                    <th className='text-center text-xs sm:text-sm md:text-base'>Aksi</th>
                 </tr>
-            </tbody>
-            <tbody>
+                </tbody>
+                <tbody>
                 {classSelected?.students?.map((student) => (
                     <tr className='border-b-2 border-neutral-200 border-spacing-2' key={student.nisn}>
-                        <td className="text-sm md:text-base">{student.nisn}</td>
-                        <td className="text-sm md:text-base">{student.name}</td>
-                        <td className="text-sm md:text-base">{student.absensi?.status}</td>
-                        <td className="text-sm md:text-base">{student.absensi?.time}</td>
+                        <td className="text-xs sm:text-sm md:text-base">{student.nisn}</td>
+                        <td className="text-xs sm:text-sm md:text-base">{student.name}</td>
+                        <td className="text-xs sm:text-sm md:text-base">{student.absensi?.status}</td>
+                        <td className="text-xs sm:text-sm md:text-base">{student.absensi?.time}</td>
                         <td onClick={() => sendShowAction(student)}>
-                            <p className='bg-blue-700 text-sm md:text-base text-white font-semibold text-center rounded-md py-2 cursor-pointer'>Edit</p>
+                            <p className='bg-blue-700 text-xs sm:text-sm md:text-base text-white font-semibold text-center rounded-md py-2 cursor-pointer'>Edit</p>
                         </td>
                     </tr>
                 ))}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     )
 }
 

@@ -67,9 +67,9 @@ const StudentsPages = () => {
 
 
     return (
-        <div className='w-full h-fit bg-neutral-200 flex'>
+        <div className='w-full h-fit bg-neutral-200 flex flex-col md:flex-row'>
             <Sidebar/>
-            <div className='w-11/12 h-fit p-5 relative overflow-hidden'>
+            <div className='w-full h-fit p-5 relative overflow-hidden'>
                 {showUpdateAbsensi && (
                     <UpdateAbsensi onClick={closeUpdateAbsensi}/>
                 )}
@@ -82,7 +82,7 @@ const StudentsPages = () => {
                     <div className='mt-3 lg:mt-0'>
                         <ListBoxClass queryDate={queryDate}/>
                     </div>
-                    <div className='border-b-2 w-fit'>
+                    <div className='border-b-2 w-fit mt-2'>
                         <h1 className='text-lg font-semibold'>Tanggal Absen</h1>
                         <input className='border-none outline-none'
                             type="date"
@@ -94,12 +94,12 @@ const StudentsPages = () => {
                     </div>
                 </div>
 
-                <div className='mt-14'>
+                <div className='mt-14 w-full'>
                     <div className='relative'>
                         <FontAwesomeIcon icon={faMagnifyingGlass}
                                          className='absolute opacity-25 left-3 inset-y-1/2 -translate-y-1/2'/>
                         <input
-                            className='w-80 h-10 p-2 pl-12 rounded-md shadow-md focus:outline-none focus:border-teal-900 transition-all'
+                            className='w-full lg:w-80 h-10 p-2 pl-12 rounded-md shadow-md focus:outline-none focus:border-teal-900 transition-all'
                             type="search"
                             name='keyword'
                             value={keyword}

@@ -86,15 +86,15 @@ const DetailClass = ({onclick, data}) => {
             </div>
             <div
                 className='w-full h-full flex flex-col lg:flex-row gap-10 p-8 overflow-x-hidden z-50 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-xl'>
-                <div className='w-fit h-fit p-2 shadow-md'>
+                <div className='lg:w-fit h-fit p-2 shadow-md'>
                     <h1 className='text-2xl font-bold text-primary'>{data.grade} {removeSymbol(data.major)}</h1>
                     <p>Jumlah Siswa {lengthStudentsOfClassSelected}</p>
                     <div className='mt-12'>
-                        <div className='relative mt-2'>
+                        <div className='relative mt-2 w-full'>
                             <FontAwesomeIcon icon={faMagnifyingGlass}
                                              className='absolute opacity-25 left-3 inset-y-1/2 -translate-y-1/2'/>
                             <input
-                                className='w-80 h-10 p-2 pl-12 rounded-md shadow-md focus:outline-none focus:border-teal-900 transition-all'
+                                className='w-full lg:w-80 h-10 p-2 pl-12 rounded-md shadow-md focus:outline-none focus:border-teal-900 transition-all'
                                 type="search"
                                 name=""
                                 placeholder='Cari Nama Siswa'

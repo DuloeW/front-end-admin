@@ -89,11 +89,11 @@ const DasboardPages = () => {
 
 
     return (
-        <div className='w-full h-fit bg-neutral-200 flex overflow-x-hidden overflow-y-auto'>
+        <div className='w-full h-fit bg-neutral-200 flex flex-col sm:flex-row overflow-x-hidden overflow-y-auto'>
             <Sidebar />
-            <div className='w-11/12 h-fit p-5 flex flex-col gap-11'>
+            <div className='w-full h-fit p-5 flex flex-col justify-center items-center gap-11'>
                 <Header title={'Dashboard Utama'} urLTitle={'pages/dashboard'}/>
-                <section className='w-full grid lg:grid-rows-1 lg:grid-cols-2 gap-10'>
+                <section className='w-full grid lg:grid-rows-1 lg:grid-cols-2 gap-10 place-items-center'>
                     <BoxInfoData icon={faSchool} title={"Jumlah Kelas"} data={classes.length} />
                     <BoxInfoData icon={faUsers} title={"Jumlah Siswa"} data={students.length} />
                     <PieChart data={dataChart} labels={labels}/>
@@ -101,7 +101,7 @@ const DasboardPages = () => {
                         <DigitalClock />
                     </div>
                 </section>
-                <section className='w-full relative'>
+                <section className='w-full grid place-items-center relative'>
                     <ListClass classes={classes}/>
                 </section>
             </div>

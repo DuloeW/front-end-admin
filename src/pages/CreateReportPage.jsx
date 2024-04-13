@@ -126,10 +126,10 @@ const CreateReportPage = () => {
     }, [])
 
     return (
-        <div className='w-full h-fit md:h-screen flex bg-neutral-200'>
+        <div className='w-full h-fit md:h-screen flex flex-col lg:flex-row bg-neutral-200'>
             <Sidebar/>
-            <div className='w-11/12 h-fit p-5'>
-                <Header title={'Buat Kode Qr'} urLTitle={'pages/qr'}/>
+            <div className='w-full h-fit p-5'>
+                <Header title={'Buat Laporan Absensi'} urLTitle={'pages/report'}/>
                 <div className='w-full grid md:grid-cols-2 grid-rows-1 gap-6 rounded-xl mt-10'>
                     <div className='w-full p-5 rounded-xl bg-white h-fit'>
                         <div>

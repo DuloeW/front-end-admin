@@ -21,12 +21,13 @@ const useClassStore = create((set) => ({
         try {
             const response = await axios.post('absensi/get/date', { date });
             const data = await response.data;
+            console.log(data)
             set((state) => ({
                 classSelectedInStudentsPages: {
                     ...state.classSelectedInStudentsPages,
                     students: state.classSelectedInStudentsPagesCopy.students?.map((student) => {
                         const studentAbsensi = data.find((absensi) => {
-                            return student.absensi.find((abs) => abs.date === date && abs.time === absensi.time && abs.id === absensi.id)
+                            return student.absensi.find((abs) => abs.date === date && abs.id === absensi.id)
                         })
                         return {
                             ...student, absensi: studentAbsensi

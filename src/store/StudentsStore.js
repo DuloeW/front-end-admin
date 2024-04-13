@@ -25,7 +25,8 @@ const useStudentsStore = create((set) => ({
         try {
             return await axios.post('students/create', data);
         } catch (error) {
-            if(error.code === "ERR_BAD_REQUEST" && (window.location.pathname !== '/login')) {
+            console.log(error)
+            if(error.response.status === 401 && (window.location.pathname !== '/login')) {
                 goToLoginPage()
             }
         }

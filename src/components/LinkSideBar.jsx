@@ -30,11 +30,11 @@
         }, [location.pathname])
 
         return (
-            <Link to={href}>
+            <Link className="w-full" to={href}>
                 <button
                     onClick={() => handleClick()}
                     type='button'
-                    className={`w-full outline-none border-none h-12 p-2 rounded-md flex items-center gap-5 transition-all hover:bg-white hover:text-primary
+                    className={`w-fit sm:w-full outline-none border-none sm:h-12 p-2 rounded-md flex items-center sm:gap-5 transition-all hover:bg-white hover:text-primary
                         ${active ? 'bg-white text-primary' : 'bg-primary text-white'}
                     `}>
                     <FontAwesomeIcon icon={icon} />

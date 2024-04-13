@@ -79,6 +79,7 @@ const AddStudent = ({classGrade}) => {
                     'Content-Type': 'multipart/form-data'
                 }
             })
+            console.log(response.data.data, 'response')
             await postDataToDatabase(response.data.data.id)
         } catch (e) {
             console.log(e)
@@ -180,7 +181,8 @@ const AddStudent = ({classGrade}) => {
                 return
             }
             const response = await uploadImageAndStudentToDatabase(file)
-            if (response.code === 'ERR_BAD_REQUEST') {
+            console.log(response)
+            if (response?.code === 'ERR_BAD_REQUEST') {
                 setAlertProps(prevState => ({
                     ...prevState,
                     message: 'Gagal Tambah Siswa',
@@ -190,6 +192,7 @@ const AddStudent = ({classGrade}) => {
                 switchShowAlert()
             }
         } catch (error) {
+            console.log(error)
             setAlertProps(prevState => ({
                 ...prevState,
                 message: 'Gagal Tambah Siswa',
@@ -283,7 +286,7 @@ const AddStudent = ({classGrade}) => {
                         <div
                             className='w-11/12 border-dashed h-[330px] border-2 p-3 overflow-hidden rounded-xl grid place-items-center'>
                             {image === '' ? (
-                                <h1 className='text-5xl font-bold opacity-20'>No File Chosen</h1>
+                                <h1 className='text-center text-2xl lg:text-5xl font-bold opacity-20'>No File Chosen</h1>
                             ) : (
                                 <img src={image} alt="" width={200} height={300}
                                      className='rounded-md h-full'/>
