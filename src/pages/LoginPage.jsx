@@ -58,7 +58,7 @@ const LoginPage = () => {
         try {
             setLoading(true)
             const response = await axios.post('admin-dasboard/login', formLogin)
-            Cookies.set('token', response.data.token, {expires: 1})
+            Cookies.set('token', response.data.token, {expires: 7})
             handleSuccess()
             setTimeout(() => {
                 goToNextPage()
