@@ -77,7 +77,6 @@ const CreateReportPage = () => {
             })
             const blob = new Blob([response.data], {type: 'application/xlsx'})
             const url = window.URL.createObjectURL(blob)
-            console.log(url)
             const link = document.getElementById('donwload')
             link.href = url
             link.setAttribute('download', `${grade}_${major}.xlsx`)
@@ -104,7 +103,6 @@ const CreateReportPage = () => {
     }, [classes])
 
     useEffect(() => {
-        console.log(classAndMajor)
         if(classAndMajor.grade === '' || classAndMajor.major === '') {
             setDisableButton(true)
         } else {

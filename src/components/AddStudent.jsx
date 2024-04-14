@@ -79,7 +79,6 @@ const AddStudent = ({classGrade}) => {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            console.log(response.data.data, 'response')
             await postDataToDatabase(response.data.data.id)
         } catch (e) {
             console.log(e)
@@ -181,7 +180,6 @@ const AddStudent = ({classGrade}) => {
                 return
             }
             const response = await uploadImageAndStudentToDatabase(file)
-            console.log(response)
             if (response?.code === 'ERR_BAD_REQUEST') {
                 setAlertProps(prevState => ({
                     ...prevState,

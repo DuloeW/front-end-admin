@@ -62,14 +62,12 @@ const QrPages = () => {
     const handleDownloadQr = async () => {
         try {
             setLoadingDownload(true)
-            console.log(classAndMajor)
             const {grade, major} = classAndMajor
             const response = await axios(`qr/download/v2/${grade}/${major}`, {
                 responseType: 'blob'
             })
             const blob = new Blob([response.data], {type: 'application/zip'})
             const url = window.URL.createObjectURL(blob)
-            console.log(url)
             const link = document.getElementById('donwload')
             link.href = url
             link.setAttribute('download', `${grade}_${major}.zip`)
@@ -85,7 +83,6 @@ const QrPages = () => {
     useEffect(() => {
         const grades = ['X', 'XI', 'XII']
         const formatedData = new Set()
-        console.log(classes)
 
         grades.forEach(grade => {
             const filteredByGrade = classes.filter(item => item.grade === grade)
@@ -97,7 +94,6 @@ const QrPages = () => {
     }, [classes])
 
     useEffect(() => {
-        console.log(classAndMajor)
         if (classAndMajor.grade === '' || classAndMajor.major === '') {
             setDisableButton(true)
         } else {

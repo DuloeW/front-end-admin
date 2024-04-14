@@ -42,7 +42,6 @@ const DasboardPages = () => {
             const sakit = getAbsensiByStatus(2);
             const apla = getAbsensiByStatus(3);
             const res = await Promise.all([hadir, izin, sakit, apla]);
-            console.log(res, 'res')
 
             const data = res.map((data, index) => {
                 return {

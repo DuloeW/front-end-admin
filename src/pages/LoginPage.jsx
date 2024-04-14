@@ -69,7 +69,6 @@ const LoginPage = () => {
         } finally {
             setLoading(false)
         }
-        console.log(formLogin)
     }
 
     const goToNextPage = () => {

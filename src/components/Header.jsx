@@ -14,7 +14,6 @@ const Header = ({urLTitle, title}) => {
     }
 
     const logOut = () => {
-        console.log('logOut')
         Cookies.remove('token')
         navigate('/login', {replace: true})
     }

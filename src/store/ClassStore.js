@@ -21,7 +21,6 @@ const useClassStore = create((set) => ({
         try {
             const response = await axios.post('absensi/get/date', { date });
             const data = await response.data;
-            console.log(data)
             set((state) => ({
                 classSelectedInStudentsPages: {
                     ...state.classSelectedInStudentsPages,

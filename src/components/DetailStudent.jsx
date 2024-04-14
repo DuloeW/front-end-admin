@@ -145,7 +145,6 @@ const DetailStudent = ({student, refresh}) => {
             if(file === undefined) {
                 try {
                     const response = await updateStudent()
-                    console.log(response)
                     if (response.code === 'ERR_BAD_REQUEST') {
                         showAlert('Gagal Update Data', faThumbsDown, false)
                         setTimeout(() => {
@@ -242,11 +241,9 @@ const DetailStudent = ({student, refresh}) => {
                                             decision={(userDecision) => {
                                                 if (userDecision) {
                                                     // User clicked "Yes"
-                                                    console.log(userDecision)
                                                     nonActivedStudent()
                                                 } else {
                                                     // User clicked "No"
-                                                    console.log(userDecision)
                                                     closeDecision()
                                                 }
                                             }}
