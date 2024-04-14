@@ -91,15 +91,15 @@ const LoginPage = () => {
     return (
         <div className='w-full h-screen relative flex flex-col-reverse md:flex-row justify-between'>
             <div className='w-full h-full p-10'>
-                <div className='w-11/12 h-full flex justify-center items-center flex-col shadow-xl rounded-xl'>
+                <div className='w-11/12 h-full flex justify-center items-center flex-col lg:shadow-xl rounded-xl'>
                     <h1 className='text-4xl font-bold text-teal-900 text-center'>Login</h1>
                     <div className='w-full h-1/2 flex flex-col justify-evenly items-center'>
-                        <input className='w-3/4 h-10 bg-neutral-100 p-2 border-l-8 border-l-teal-900  outline-none'
+                        <input className='w-full lg:w-3/4 h-10 bg-neutral-100 p-2 border-l-8 border-l-teal-900  outline-none'
                                type="text"
                                name='email'
                                onChange={(e) => handleInput(e)}
                                placeholder='Email'/>
-                        <div className='w-3/4 relative mt-10'>
+                        <div className='w-full lg:w-3/4 relative mt-10'>
                             <input type={isShowPassword ? 'text' : 'password'}
                                    name='password'
                                    onChange={(e) => handleInput(e)}
@@ -112,7 +112,7 @@ const LoginPage = () => {
                             />
                         </div>
                         <button
-                            className='w-3/4 h-10 bg-teal-900 text-white font-bold rounded-md border-none outline-none'
+                            className='w-3/4 h-14 sm:mt-5 bg-teal-900 text-white font-bold rounded-md border-none outline-none'
                             onClick={() => login()}
                         >
                             {loading ? (
@@ -127,8 +127,8 @@ const LoginPage = () => {
                     <Alert icon={alertProps.icon} message={alertProps.message} trueOrFalse={alertProps.trueOrFalse}/>
                 </div>
             )}
-            <div className='w-full h-fit md:h-fit sm:h-full grid place-items-center'>
-                <img className="w-32 sm:h-[200px] sm:w-[200px] md:w-[500px] md:h-[500px]"
+            <div className='w-full h-fit md:h-fit sm:h-full grid place-items-center p-5'>
+                <img className="w-48 sm:h-[200px] sm:w-[200px] md:w-[500px] md:h-[500px]"
                      src='/login.jpg'
                      width={500}
                      alt={'Login'}/>
