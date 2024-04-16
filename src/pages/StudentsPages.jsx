@@ -46,13 +46,9 @@ const StudentsPages = () => {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('date') !== null) {
-            localStorage.setItem('date', new Date().toISOString().split('T')[0])
-            setQueryDate(localStorage.getItem('date'))
-        } else {
-            localStorage.setItem('date', new Date().toISOString().split('T')[0])
-            setQueryDate(localStorage.getItem('date'))
-        }
+        localStorage.setItem('date', new Date().toISOString().split('T')[0])
+        setQueryDate(localStorage.getItem('date'))
+
     }, [])
 
     useEffect(() => {
@@ -85,11 +81,11 @@ const StudentsPages = () => {
                     <div className='border-b-2 w-fit mt-2'>
                         <h1 className='text-lg font-semibold'>Tanggal Absen</h1>
                         <input className='border-none outline-none'
-                            type="date"
-                            name="ka"
-                            id="ss"
-                            value={queryDate}
-                            onChange={(e) => handleDateChange(e)}
+                               type="date"
+                               name="ka"
+                               id="ss"
+                               value={queryDate}
+                               onChange={(e) => handleDateChange(e)}
                         />
                     </div>
                 </div>
@@ -123,7 +119,8 @@ const StudentsPages = () => {
                         </div>
                     </div>
                     <div className='w-full px-3 overflow-y-auto mt-3'>
-                        <Table onClickOpen={openUpdateAbsensi} classStudentsPage={classSelectedInStudentsPages} keyword={keyword}/>
+                        <Table onClickOpen={openUpdateAbsensi} classStudentsPage={classSelectedInStudentsPages}
+                               keyword={keyword}/>
                     </div>
                 </div>
             </div>

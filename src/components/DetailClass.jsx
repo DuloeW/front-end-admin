@@ -2,7 +2,6 @@ import Table from "./Table.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAdd, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
 import React, {useEffect, useState} from "react";
-import bayu from "../assets/bayu.jpg";
 import AddStudent from "./AddStudent.jsx";
 import DetailStudent from "./DetailStudent.jsx";
 import '../assets/css/Custom.css'
